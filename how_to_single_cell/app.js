@@ -11,7 +11,7 @@ const topics = [
   {
     id: 1,
     title: 'High Mitochondrial RNA %',
-    artifact: 'Damaged/dying cells with ruptured membranes lose cytoplasmic mRNA while retaining mitochondrial transcripts — standard QC filters cells with >5% mtRNA.',
+    artifact: 'You observe increased mitochondrial transcripts in a subset of your cells. Your standard QC pipeline flags them for removal at the >5% mtRNA threshold. Should you filter them out?',
     signal: 'High mtRNA reflects genuine metabolic reprogramming. Cancer drug-tolerant persisters actively transfer mitochondria between cells. Heart and kidney cells naturally have high mtRNA due to energy demands.',
     answer: 'both',
     explanation: 'While high mtRNA can indicate damaged cells, it is also a marker of metabolic state. In cancer, drug-tolerant persisters show high mtRNA due to active mitochondrial transfer via tunneling nanotubes. The 5% threshold fails in ~30% of human tissues.',
@@ -22,7 +22,7 @@ const topics = [
   {
     id: 2,
     title: 'Hemoglobin Gene Expression',
-    artifact: 'HBB/HBA expression in non-blood cells is red blood cell contamination or ambient RNA from lysed erythrocytes.',
+    artifact: 'You observe HBB and HBA hemoglobin gene expression in your non-blood cell clusters — chondrocytes, monocytes, or progenitor cells. Is this red blood cell contamination, or something else?',
     signal: 'Chondrocytes in avascular cartilage express hemoglobin to form "hedy" structures that bind oxygen in hypoxic environments. Erythroid-biased progenitors express HBB as a lineage priming marker.',
     answer: 'both',
     explanation: 'Extra-erythrocytic hemoglobin is a real biological phenomenon. Chondrocytes produce hemoglobin proteins forming membrane-free "hedy" structures for oxygen storage, similar to myoglobin in muscles. This is linked to hypoxia adaptation in osteoarthritis.',
@@ -33,7 +33,7 @@ const topics = [
   {
     id: 3,
     title: 'MALAT1 Detection Levels',
-    artifact: 'MALAT1 is a technical QC marker — high levels indicate intact nucleus, low levels suggest empty droplets or damaged cells.',
+    artifact: 'You notice that MALAT1 expression varies dramatically across your cells — some clusters show very high levels, others very low. You read that MALAT1 is a marker of nuclear integrity. Should you use it to filter out low-quality cells?',
     signal: 'MALAT1 is a functional long non-coding RNA that regulates alternative splicing and cell cycle. Its variability reflects cell-type-specific nuclear fragility (e.g., hepatocytes, cardiomyocytes).',
     answer: 'both',
     explanation: 'MALAT1 serves dual roles: technically, it correlates with nuclear fraction (r=0.71) making it a QC marker; biologically, it regulates splicing in nuclear speckles. Low MALAT1 in large fragile cells reflects their vulnerability to mechanical stress during processing.',
@@ -44,7 +44,7 @@ const topics = [
   {
     id: 4,
     title: 'Dissociation-Induced Stress Genes',
-    artifact: 'Enzymatic tissue dissociation at 37°C induces 512 artifactual stress genes (FOS, JUN, ATF3) that mimic inflammation and apoptosis signatures.',
+    artifact: 'You observe strong expression of immediate-early genes (FOS, JUN, ATF3) across many cell types after enzymatic tissue dissociation at 37°C. These 512 stress genes overlap with inflammation and apoptosis signatures. Is your biological signal real, or an artifact of sample processing?',
     signal: 'The dissociation response reveals stem cell activation biology. Muscle satellite cells enter "early activation" during dissociation — the stress response maps cellular sensitivity to microenvironmental changes.',
     answer: 'both',
     explanation: 'The 512-gene stress signature (HSPs, IEGs) is technically induced by collagenase at 37°C. However, in quiescent stem cells, this response is the biological initiation of the regenerative program. Cold protease protocols can separate technical from biological stress.',
@@ -55,7 +55,7 @@ const topics = [
   {
     id: 5,
     title: 'Doublet Capture Events',
-    artifact: 'Two cells captured in one droplet — identified by high UMI counts and mixed lineage signatures. Typically removed as microfluidic errors.',
+    artifact: 'Your doublet detection tool flags a set of droplets with high UMI counts and mixed lineage signatures — a macrophage and a dendritic cell in the same droplet, for example. You are about to remove them. But could some of these be real cell-cell interactions?',
     signal: 'Many doublets are physically interacting cells (biological doublets). The CIcADA pipeline reveals juxtacrine signaling — macrophage-dendritic cell doublets show upregulated MHC and adhesion genes from real cell-cell contact.',
     answer: 'both',
     explanation: 'CIcADA compares real doublets to synthetic doublets to find transcriptomic differences caused by physical contact. Tumor-associated biological doublets reveal immune cell interactions, with upregulated MHC-I/II and CD48 reflecting actual juxtacrine signaling.',
@@ -66,7 +66,7 @@ const topics = [
   {
     id: 6,
     title: 'Platelet Marker Contamination',
-    artifact: 'PPBP and PF4 appearing in monocyte/neutrophil clusters indicates poor platelet depletion during sample preparation.',
+    artifact: 'You find platelet markers PPBP and PF4 expressed in your monocyte and neutrophil clusters. Your first thought is poor platelet depletion during sample preparation. Should you regress these out or filter the affected cells?',
     signal: 'Platelet-leukocyte aggregates are functional innate immune units that increase during infections (COVID-19, HIV), sepsis, and thrombotic events. Their transcripts indicate platelet-mediated immune modulation.',
     answer: 'both',
     explanation: 'Platelet "contamination" in leukocyte clusters often reflects real platelet-leukocyte aggregates — biologically relevant formations during inflammation. In acute MI patients, the platelet transcriptome correlates with clinical reactivity and aggregation.',
@@ -77,7 +77,7 @@ const topics = [
   {
     id: 7,
     title: 'Spatial Autofluorescence',
-    artifact: 'Background autofluorescence in spatial transcriptomics reduces signal-to-noise ratio and causes false transcript detection. Typically quenched with Sudan Black.',
+    artifact: 'You are running a spatial transcriptomics experiment on adult brain tissue and observe strong background autofluorescence that overlaps with your fluorophore channels (570–640 nm). You plan to quench it with Sudan Black. But what is generating this signal?',
     signal: 'Lipofuscin — the major source of autofluorescence — is a definitive biological hallmark of aging and senescence. Its spatial distribution near amyloid-beta plaques reveals disrupted autophagy in Alzheimer\'s disease.',
     answer: 'both',
     explanation: 'Lipofuscin accumulates in lysosomes of post-mitotic cells (neurons, cardiomyocytes) from incomplete degradation. While technically problematic (emission 570-640nm overlaps fluorophores), it maps cellular "wear and tear" and senescence — quenching it removes this biological information.',
@@ -88,7 +88,7 @@ const topics = [
   {
     id: 8,
     title: 'Low UMI / Gene Counts',
-    artifact: 'Cells below minimum UMI/gene thresholds are discarded as empty droplets, ambient RNA, or failed captures.',
+    artifact: 'A large population of cells in your dataset falls below your minimum UMI and gene count thresholds. Your QC pipeline labels them as empty droplets or failed captures and removes them. Could you be throwing away real cells?',
     signal: 'Low transcriptional diversity is a hallmark of quiescence. Long-term engrafting HSPCs, naive T cells, and mature neutrophils have genuinely low RNA content — removing them biases atlases toward activated cell types.',
     answer: 'both',
     explanation: 'Adaptive QC tools like ddqc apply cluster-specific thresholds based on MAD, recovering biologically meaningful quiescent populations. Total genes expressed varies with cell type and state — UMI count is a biological proxy for metabolic activity.',
@@ -99,7 +99,7 @@ const topics = [
   {
     id: 9,
     title: 'Ribosomal Protein Gene Fraction',
-    artifact: 'High RP gene fraction is treated as technical noise or cell stress — often regressed out as a batch effect or housekeeping artifact.',
+    artifact: 'You notice that ribosomal protein genes account for a large fraction of reads in certain cell clusters. A colleague suggests regressing them out as housekeeping noise or a batch effect. Is the variation in RP genes really just technical?',
     signal: 'Ribosomes are not homogeneous. RP genes show dynamic compositional heterogeneity across tissues and cell states. High RP content in naive T cells reflects translational demand for rapid clonal expansion.',
     answer: 'both',
     explanation: 'Single-cell atlases across 15 human tissues reveal tissue-specific RP gene expression patterns (e.g., RPL36A high in blood). RP stoichiometry reflects specialized translational needs — a biological variable, not just housekeeping noise.',
@@ -110,7 +110,7 @@ const topics = [
   {
     id: 10,
     title: 'Intronic Reads',
-    artifact: 'Reads mapping to introns are genomic DNA contamination or ambient nuclear RNA from cell lysis — historically filtered out.',
+    artifact: 'A significant fraction of your reads map to intronic regions rather than exons. Your pipeline documentation says these are genomic DNA contamination or ambient nuclear RNA, and recommends filtering them out. Should you?',
     signal: 'Intronic reads represent nascent unspliced mRNA. RNA velocity uses the unspliced/spliced ratio to predict future cell states. In snRNA-seq, intronic reads (~40% of library) reflect transcriptional momentum.',
     answer: 'both',
     explanation: 'RNA velocity transformed "contaminating" intronic reads into the key variable for trajectory analysis. The unspliced-to-spliced ratio estimates the rate of gene expression change, predicting developmental fate. Longer genes with more intronic poly(A) stretches are preferentially detected in nuclear libraries.',
@@ -121,7 +121,7 @@ const topics = [
   {
     id: 11,
     title: 'Cell Cycle Gene Signatures',
-    artifact: 'Cell cycle genes create dominant clusters that obscure subtle cell-type differences — routinely regressed out to "purify" biological signal.',
+    artifact: 'Cell cycle genes dominate your clustering — you see large S-phase and G2M clusters that obscure the cell-type differences you are interested in. You decide to regress out cell cycle scores. But are you removing noise, or deleting biology?',
     signal: 'Cell cycle is a fundamental biological variable. In Th17 populations, trajectory analysis reveals "effector", "proliferating", and "stem-like" subsets. Regressing out cell cycle deletes these functional dynamics.',
     answer: 'both',
     explanation: 'The proliferative fraction indicates tumor aggressiveness and treatment response. In immune cells, naive-to-effector transitions are intrinsically coupled to cell cycle. Methods like SCTransform stabilize variance without eliminating this biological structure.',
@@ -132,7 +132,7 @@ const topics = [
   {
     id: 12,
     title: 'Ambient RNA "Soup"',
-    artifact: 'Cell-free mRNA captured in droplets regardless of cell presence — removed using tools like SoupX to clean expression matrices.',
+    artifact: 'You run SoupX on your data and find substantial ambient RNA contamination — cell-free mRNA present in droplets regardless of whether they contain a cell. You subtract this "soup" from your expression matrix. But is the ambient RNA just noise?',
     signal: 'Ambient RNA composition is not random. Outlier transcripts (above Poisson expectation) represent co-packaged RNA in extracellular vesicles or cellular debris — a proxy for the tissue secretome.',
     answer: 'both',
     explanation: 'By analyzing empty droplet statistics, researchers found that "ambient" outliers often represent co-packaged RNA in extracellular vesicles. The "soup" serves as a proxy for the tissue\'s secretome and cellular breakdown patterns — an ecological variable, not just contamination.',
@@ -143,7 +143,7 @@ const topics = [
   {
     id: 13,
     title: 'Gene Length Bias (snRNA-seq)',
-    artifact: 'snRNA-seq preferentially detects longer genes due to internal poly(T) primer hybridization to intronic poly(A) stretches — a technical detection bias.',
+    artifact: 'You compare your snRNA-seq data with a published scRNA-seq dataset of the same tissue and notice that your nuclear data preferentially detects longer genes. Is this a technical bias that needs correction, or is it telling you something about these cells?',
     signal: 'Longer genes are associated with complex neuronal functions and synaptic development. The "bias" provides a high-resolution view of long-gene transcriptional programs in brain and adipose tissue.',
     answer: 'both',
     explanation: 'This detection bias is a biological signature of cell-type commitment to long-gene programs. Neurons and adipocytes express many long genes — the snRNA-seq "bias" actually enhances detection of these biologically important transcripts in tissues that are hard to dissociate.',
