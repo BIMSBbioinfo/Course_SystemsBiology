@@ -1,0 +1,19 @@
+# Data files
+Part1_PBMC_Analysis/data/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# R output
+Part1_PBMC_Analysis/*.html
+
+# Intermediate download files
+Part2_Interactive_Website/images/*.jpg
+Part2_Interactive_Website/images/*.gif
+Part2_Interactive_Website/images/tmp_*.html
+
+# OS
+.DS_Store
+Thumbs.db
