@@ -184,6 +184,21 @@ header p { opacity: .9; font-size: .95rem; }
 
 .vote-btn:disabled { opacity: .6; cursor: default; transform: none; }
 
+/* === Vote recorded (student view) === */
+.vote-recorded {
+  display: none;
+  padding: 1.25rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  animation: fadeIn .4s ease;
+}
+.vote-recorded.show { display: block; }
+.vote-recorded p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
 /* === Result reveal === */
 .result-reveal {
   display: none;

@@ -4,6 +4,7 @@
    ============================================================ */
 
 const STORAGE_KEY = 'artifact_signal_votes';
+const IS_TEACHER = new URLSearchParams(window.location.search).get('teacher') === 'true';
 
 /* ---------- Topic data ---------- */
 const topics = [
@@ -194,20 +195,24 @@ function renderNav() {
     nav.appendChild(btn);
   });
 
-  const resBtn = document.createElement('button');
-  resBtn.textContent = 'Results';
-  resBtn.dataset.page = 'results';
-  resBtn.addEventListener('click', () => { renderResults(); showPage('results'); });
-  nav.appendChild(resBtn);
+  if (IS_TEACHER) {
+    const resBtn = document.createElement('button');
+    resBtn.textContent = 'Results';
+    resBtn.dataset.page = 'results';
+    resBtn.addEventListener('click', () => { renderResults(); showPage('results'); });
+    nav.appendChild(resBtn);
+  }
 
-  const teachBtn = document.createElement('button');
-  teachBtn.textContent = 'Teacher';
-  teachBtn.dataset.page = 'teacher';
-  teachBtn.style.background = '#7c3aed';
-  teachBtn.style.color = 'white';
-  teachBtn.style.borderColor = '#7c3aed';
-  teachBtn.addEventListener('click', () => { renderTeacher(); showPage('teacher'); });
-  nav.appendChild(teachBtn);
+  if (IS_TEACHER) {
+    const teachBtn = document.createElement('button');
+    teachBtn.textContent = 'Teacher';
+    teachBtn.dataset.page = 'teacher';
+    teachBtn.style.background = '#7c3aed';
+    teachBtn.style.color = 'white';
+    teachBtn.style.borderColor = '#7c3aed';
+    teachBtn.addEventListener('click', () => { renderTeacher(); showPage('teacher'); });
+    nav.appendChild(teachBtn);
+  }
 }
 
 function renderLanding() {
@@ -230,7 +235,7 @@ function renderLanding() {
   // generate QR code
   if (typeof QRCode !== 'undefined') {
     new QRCode(document.getElementById('qr-code'), {
-      text: window.location.href,
+      text: window.location.origin + window.location.pathname,
       width: 200,
       height: 200,
       colorDark: '#1e293b',
@@ -278,7 +283,10 @@ function renderTopics() {
             Both
           </button>
         </div>
-        <div class="result-reveal ${voted?'show':''}" id="reveal-${t.id}">
+        <div class="vote-recorded ${voted?'show':''}" id="recorded-${t.id}" ${IS_TEACHER?'style="display:none"':''}>
+          <p>Vote recorded! Watch the screen for the answer.</p>
+        </div>
+        <div class="result-reveal ${IS_TEACHER && voted?'show':''}" id="reveal-${t.id}" ${!IS_TEACHER?'style="display:none !important"':''}>
           <span class="answer-badge both">Answer: Both!</span>
           <p class="signal-text"><strong>The biological signal:</strong> ${t.signal}</p>
           <p class="explanation" style="margin-top:.75rem">${t.explanation}</p>
@@ -310,9 +318,14 @@ function renderTopics() {
     });
     e.target.classList.add('selected');
 
-    // reveal
-    const reveal = $(`#reveal-${topicId}`);
-    reveal.classList.add('show');
+    // reveal or show "recorded" message
+    if (IS_TEACHER) {
+      const reveal = $(`#reveal-${topicId}`);
+      reveal.classList.add('show');
+    } else {
+      const recorded = $(`#recorded-${topicId}`);
+      if (recorded) recorded.classList.add('show');
+    }
 
     // update nav
     updateNav();
