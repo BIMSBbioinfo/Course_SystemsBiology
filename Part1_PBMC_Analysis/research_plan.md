@@ -13,20 +13,17 @@ Live demo analysis of the 10x Genomics PBMC 3k dataset for a single-cell data an
 
 ```
 Part1_PBMC_Analysis/
-├── Scripts/
-│   ├── Bin/          # All functions and executables
-│   └── Reports/      # All R Markdown reports
-├── Results/          # All figures created by reports
-├── data/             # Downloaded PBMC 3k data from 10x Genomics
-├── setup.R           # Environment setup and data download
-└── research_plan.md  # This file
+├── data/                 # Downloaded PBMC 3k data from 10x Genomics [DONE]
+├── results/              # Output figures
+├── setup.R               # Environment setup and data download [DONE]
+├── PBMC_analysis.Rmd     # Full Seurat analysis workflow [DONE]
+└── research_plan.md      # This file
 ```
 
 ### Rules
 
 - Downloaded data goes in `data/` with source documented in this plan
-- `Results/` subdirectories are named after the report that generates them
-- Figure filenames follow: `<date>_<figure_type>_<data_description>.pdf`
+- `results/` holds output figures and intermediate files
 
 ## Data Source
 
@@ -41,7 +38,7 @@ Part1_PBMC_Analysis/
 ### R
 
 - R (version 4.x, system default)
-- Reproducible environment via `renv` (optional for course demo)
+- Reproducible environment via `renv` 
 - Key packages:
   - **Seurat** (v5) — core scRNA-seq analysis
   - **dplyr** — data manipulation
@@ -53,7 +50,6 @@ Part1_PBMC_Analysis/
 
 - Must be executable on a Mac laptop
 - No Python dependencies
-- No cacheR
 - No external data folder symlinks
 
 ## Git
@@ -63,39 +59,39 @@ Part1_PBMC_Analysis/
 
 ## Scientific Analysis Plan
 
-### 1. Data Loading
+### 1. Data Loading [DONE — PBMC_analysis.Rmd]
 - Read 10x Cell Ranger output (filtered gene/barcode matrices)
 - Create Seurat object with minimum filtering (min.cells=3, min.features=200)
 
-### 2. Quality Control
+### 2. Quality Control [DONE — PBMC_analysis.Rmd]
 - Calculate mitochondrial RNA percentage (`percent.mt`)
 - Visualize QC metrics: violin plots (nFeature_RNA, nCount_RNA, percent.mt)
 - Scatter plots: nCount vs percent.mt, nCount vs nFeature
 - Filter: 200 < nFeature_RNA < 2500, percent.mt < 5%
 
-### 3. Normalization & Feature Selection
+### 3. Normalization & Feature Selection [DONE — PBMC_analysis.Rmd]
 - LogNormalize (scale factor 10,000)
 - FindVariableFeatures (VST method, 2000 features)
 - Visualize top variable features
 
-### 4. Dimensionality Reduction
+### 4. Dimensionality Reduction [DONE — PBMC_analysis.Rmd]
 - ScaleData (all genes)
 - RunPCA on variable features
 - ElbowPlot to determine significant PCs
 - Select top 10 PCs for downstream analysis
 
-### 5. Clustering
+### 5. Clustering [DONE — PBMC_analysis.Rmd]
 - FindNeighbors (dims 1:10)
 - FindClusters (resolution 0.5)
 - RunUMAP (dims 1:10)
 - DimPlot visualization
 
-### 6. Marker Identification
+### 6. Marker Identification [DONE — PBMC_analysis.Rmd]
 - FindAllMarkers (positive markers, min.pct=0.25, logfc.threshold=0.25)
 - Top 5 markers per cluster
 - DoHeatmap visualization
 
-### 7. Cell Type Annotation
+### 7. Cell Type Annotation [DONE — PBMC_analysis.Rmd]
 - Manual annotation based on canonical PBMC markers:
   - **Naive CD4 T**: IL7R, CCR7
   - **CD14+ Monocytes**: CD14, LYZ
@@ -107,15 +103,31 @@ Part1_PBMC_Analysis/
   - **Dendritic cells**: FCER1A, CST3
   - **Platelets**: PPBP
 
-### 8. Visualization
+### 8. Visualization [DONE — PBMC_analysis.Rmd]
 - Annotated UMAP
-- FeaturePlot for key markers
+- FeaturePlot for key markers (MS4A1, GNLY, CD3E, CD14, FCER1A, FCGR3A, LYZ, PPBP, CD8A)
 - DotPlot across cell types
-- VlnPlot for selected markers
+- VlnPlot for selected markers (CD3D, MS4A1, CD14, FCGR3A)
 
-### 9. Output
-- Knit RMarkdown to self-contained HTML (`self_contained: true`)
+### 9. Output [DONE — PBMC_analysis.Rmd]
+- Knit RMarkdown to self-contained HTML (`self_contained: true`, theme: flatly, toc: floating)
 - Session info for reproducibility
+
+## Implementation Status
+
+| Component | Status | File |
+|-----------|--------|------|
+| R package installation | DONE | `setup.R` |
+| PBMC 3k data download | DONE | `setup.R` |
+| Data loading & Seurat object | DONE | `PBMC_analysis.Rmd` |
+| QC & filtering | DONE | `PBMC_analysis.Rmd` |
+| Normalization & variable features | DONE | `PBMC_analysis.Rmd` |
+| PCA & elbow plot | DONE | `PBMC_analysis.Rmd` |
+| Clustering & UMAP | DONE | `PBMC_analysis.Rmd` |
+| Marker identification | DONE | `PBMC_analysis.Rmd` |
+| Cell type annotation | DONE | `PBMC_analysis.Rmd` |
+| Visualization (feature/dot/violin) | DONE | `PBMC_analysis.Rmd` |
+| HTML rendering | READY | Run execution commands below |
 
 ## Execution
 

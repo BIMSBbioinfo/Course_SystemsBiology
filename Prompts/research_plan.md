@@ -19,3 +19,8 @@ Confounding technical and biological features:
 [] The voting should be separate on each example. I as the teacher should be able to show the students the results of the voting.
 [] Each webpage should show only the text for the technical issue. Remove the "As technical artifact". 
 [] The biological signal text should appear only after the voting is closed.
+
+[] can you please increase the font on the question?
+[] we need to sort out the pictures now. They are either clutter, or don't show the correct information. Can you please check for the relevant information, and include 1 high resolution figure per page.
+
+

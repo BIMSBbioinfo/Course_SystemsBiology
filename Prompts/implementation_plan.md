@@ -45,7 +45,7 @@ Standard Seurat PBMC tutorial workflow:
 
 ### Step 4: Website structure [DONE]
 ```
-Part2_Interactive_Website/
+how_to_single_cell/
 ├── index.html          # Landing page with QR code + navigation
 ├── style.css           # Mobile-first responsive styling
 ├── app.js              # Voting logic (localStorage), navigation
@@ -99,38 +99,50 @@ The 13 topics (from documentation):
 
 ---
 
-## Remaining Work
+## Completed Fixes
 
-### Fix 1: Hide biological signal text before voting
-**Files**: `app.js`
-- In `renderTopics()`, remove the "As a biological signal:" paragraph from the pre-vote description
-- Move the biological signal text into the `.result-reveal` section that appears after voting
+### Fix 1: Hide biological signal text before voting [DONE]
+- Students only see the technical artifact description before voting
+- Biological signal text appears in the reveal section after voting
 
-### Fix 2: Teacher/presenter results view
-**Files**: `app.js`, `index.html`
-- Add a "Teacher View" button/page accessible from nav
-- Shows all 13 topics with vote counts
-- Can be projected on screen for students to see aggregate results
-- Option: simple URL parameter `?teacher=true` to toggle teacher mode
+### Fix 2: Teacher/presenter results view [DONE]
+- Teacher view accessible via `?teacher=true` URL parameter
+- Teacher Dashboard with per-topic horizontal bar charts + reveal buttons
+- "Reveal All Answers" button for classroom presentation
+- Teacher/Results nav buttons hidden from student view
+
+### Fix 3: Teacher-controlled answer reveal [DONE]
+- Students see "Vote recorded! Watch the screen for the answer." after voting
+- Answers only visible on teacher's projected screen (`?teacher=true`)
+- QR code always points to student URL (without `?teacher`)
+
+### Fix 4: Increase font on the question [TODO]
+**Files**: `style.css`
+- Increase font size of the technical artifact description text in `.topic-card .description`
+
+### Fix 5: Fix publication figures [TODO]
+**Files**: `images/`, `app.js`
+- Review each of the 13 figures for relevance and correctness
+- Replace irrelevant or cluttered figures with correct high-resolution ones (1 per topic)
+- Each figure should clearly showcase the specific technical artifact / biological signal example
 
 ---
 
-## Execution Commands
+## Deployment
 
-### Part 1
+### GitHub Pages [DONE]
+- **Repo**: `git@github.com:BIMSBbioinfo/Course_SystemsBiology.git`
+- **Website folder**: `how_to_single_cell/`
+- **Student URL**: `https://bioinformatics.mdc-berlin.de/Course_SystemsBiology/how_to_single_cell/`
+- **Teacher URL**: `https://bioinformatics.mdc-berlin.de/Course_SystemsBiology/how_to_single_cell/?teacher=true`
+
+### Part 1 Execution
 ```bash
 cd Part1_PBMC_Analysis
 Rscript setup.R                                          # install + download data
-Rscript -e "rmarkdown::render('PBMC_analysis.Rmd')"      # render to HTML
+PATH="/usr/bin:$PATH" Rscript -e "Sys.setenv(RSTUDIO_PANDOC='/usr/bin'); rmarkdown::render('PBMC_analysis.Rmd')"
 ```
-
-### Part 2
-```bash
-cd Part2_Interactive_Website
-python3 -m http.server 8000    # serve locally for phone access
-# Open http://localhost:8000 in browser
-# Scan QR code on phone (same WiFi network)
-```
+Note: Use system pandoc (`/usr/bin/pandoc`) — Guix pandoc has a stack smashing bug.
 
 ## Constraints
 - **No `rm` or `mv` commands** (project rule)
