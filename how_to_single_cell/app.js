@@ -17,7 +17,8 @@ const topics = [
     explanation: 'While high mtRNA can indicate damaged cells, it is also a marker of metabolic state. In cancer, drug-tolerant persisters show high mtRNA due to active mitochondrial transfer via tunneling nanotubes. The 5% threshold fails in ~30% of human tissues.',
     genes: 'RGS5, MYL9, MIRO1',
     reference: 'Osorio-Querejeta et al. (2021); Chen et al. (2024) Cancer Res',
-    image: 'images/01_mitochondria.png'
+    image: 'images/01_mitochondria.png',
+    figureRef: { text: 'Hippen et al. (2021) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8599307/' }
   },
   {
     id: 2,
@@ -28,7 +29,8 @@ const topics = [
     explanation: 'Extra-erythrocytic hemoglobin is a real biological phenomenon. Chondrocytes produce hemoglobin proteins forming membrane-free "hedy" structures for oxygen storage, similar to myoglobin in muscles. This is linked to hypoxia adaptation in osteoarthritis.',
     genes: 'HBB, HBA1, SPP1',
     reference: 'Liu et al. (2024) PMC11687149',
-    image: 'images/02_hemoglobin.png'
+    image: 'images/02_hemoglobin.png',
+    figureRef: { text: 'Liu et al. (2024) Front Immunol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11687149/' }
   },
   {
     id: 3,
@@ -39,7 +41,8 @@ const topics = [
     explanation: 'MALAT1 serves dual roles: technically, it correlates with nuclear fraction (r=0.71) making it a QC marker; biologically, it regulates splicing in nuclear speckles. Low MALAT1 in large fragile cells reflects their vulnerability to mechanical stress during processing.',
     genes: 'MALAT1',
     reference: 'Mattick et al. (2024) bioRxiv',
-    image: 'images/03_malat1.png'
+    image: 'images/03_malat1.png',
+    figureRef: { text: 'Montserrat-Ayuso & Esteve-Codina (2024) BMC Genomics', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11580415/' }
   },
   {
     id: 4,
@@ -50,7 +53,8 @@ const topics = [
     explanation: 'The 512-gene stress signature (HSPs, IEGs) is technically induced by collagenase at 37°C. However, in quiescent stem cells, this response is the biological initiation of the regenerative program. Cold protease protocols can separate technical from biological stress.',
     genes: 'FOS, JUN, ATF3, FOSB, JUNB',
     reference: 'Adam et al. (2017) Genome Biol; van den Brink et al. (2017)',
-    image: 'images/04_dissociation.png'
+    image: 'images/04_dissociation.png',
+    figureRef: { text: 'Adam et al. (2017) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6796327/' }
   },
   {
     id: 5,
@@ -61,7 +65,8 @@ const topics = [
     explanation: 'CIcADA compares real doublets to synthetic doublets to find transcriptomic differences caused by physical contact. Tumor-associated biological doublets reveal immune cell interactions, with upregulated MHC-I/II and CD48 reflecting actual juxtacrine signaling.',
     genes: 'CD48, H2-K1, H2-D1 (MHC-I/II)',
     reference: 'Bais et al. (2023) PMC10516525',
-    image: 'images/05_doublets.png'
+    image: 'images/05_doublets.png',
+    figureRef: { text: 'Bais et al. (2023) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10516525/' }
   },
   {
     id: 6,
@@ -72,7 +77,8 @@ const topics = [
     explanation: 'Platelet "contamination" in leukocyte clusters often reflects real platelet-leukocyte aggregates — biologically relevant formations during inflammation. In acute MI patients, the platelet transcriptome correlates with clinical reactivity and aggregation.',
     genes: 'PPBP, PF4, ITGA2, PDGFB',
     reference: 'Burkhart et al. (2016) PMC4933502; Kral et al. (2022)',
-    image: 'images/06_platelets.png'
+    image: 'images/06_platelets.png',
+    figureRef: { text: 'Almeida et al. (2024) Int J Mol Sci', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11173046/' }
   },
   {
     id: 7,
@@ -83,7 +89,8 @@ const topics = [
     explanation: 'Lipofuscin accumulates in lysosomes of post-mitotic cells (neurons, cardiomyocytes) from incomplete degradation. While technically problematic (emission 570-640nm overlaps fluorophores), it maps cellular "wear and tear" and senescence — quenching it removes this biological information.',
     genes: 'Lipofuscin (broad-spectrum pigment)',
     reference: 'Chen et al. (2025) PMC12699879',
-    image: 'images/07_autofluorescence.png'
+    image: 'images/07_autofluorescence.png',
+    figureRef: { text: 'Chen et al. (2025) Ageing Res Rev', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12699879/' }
   },
   {
     id: 8,
@@ -94,7 +101,8 @@ const topics = [
     explanation: 'Adaptive QC tools like ddqc apply cluster-specific thresholds based on MAD, recovering biologically meaningful quiescent populations. Total genes expressed varies with cell type and state — UMI count is a biological proxy for metabolic activity.',
     genes: 'Low complexity distribution',
     reference: 'Subramanian et al. (2022) PMC9793662',
-    image: 'images/08_low_umi.png'
+    image: 'images/08_low_umi.png',
+    figureRef: { text: 'Subramanian et al. (2022) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9793662/' }
   },
   {
     id: 9,
@@ -105,7 +113,8 @@ const topics = [
     explanation: 'Single-cell atlases across 15 human tissues reveal tissue-specific RP gene expression patterns (e.g., RPL36A high in blood). RP stoichiometry reflects specialized translational needs — a biological variable, not just housekeeping noise.',
     genes: 'RPLP1, RPS27, RPL36A, RPLP0',
     reference: 'Gupta et al. (2025) bioRxiv; Subramanian et al. (2022)',
-    image: 'images/09_ribosomal.png'
+    image: 'images/09_ribosomal.png',
+    figureRef: { text: 'Guimaraes & Zavolan (2016) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5123215/' }
   },
   {
     id: 10,
@@ -116,7 +125,8 @@ const topics = [
     explanation: 'RNA velocity transformed "contaminating" intronic reads into the key variable for trajectory analysis. The unspliced-to-spliced ratio estimates the rate of gene expression change, predicting developmental fate. Longer genes with more intronic poly(A) stretches are preferentially detected in nuclear libraries.',
     genes: 'Unspliced vs. spliced transcript ratio',
     reference: 'La Manno et al. (2018); Bergen et al. (2020)',
-    image: 'images/10_intronic.png'
+    image: 'images/10_intronic.png',
+    figureRef: { text: 'La Manno et al. (2018) Nature', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6130801/' }
   },
   {
     id: 11,
@@ -127,7 +137,8 @@ const topics = [
     explanation: 'The proliferative fraction indicates tumor aggressiveness and treatment response. In immune cells, naive-to-effector transitions are intrinsically coupled to cell cycle. Methods like SCTransform stabilize variance without eliminating this biological structure.',
     genes: 'RORC, IFNG (Th17 trajectories)',
     reference: 'Zhao et al. (2023) PMC10300431',
-    image: 'images/11_cellcycle.png'
+    image: 'images/11_cellcycle.png',
+    figureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' }
   },
   {
     id: 12,
@@ -138,7 +149,8 @@ const topics = [
     explanation: 'By analyzing empty droplet statistics, researchers found that "ambient" outliers often represent co-packaged RNA in extracellular vesicles. The "soup" serves as a proxy for the tissue\'s secretome and cellular breakdown patterns — an ecological variable, not just contamination.',
     genes: 'Poisson model outliers',
     reference: 'Noga et al. (2026) bioRxiv; Young & Beber (2020)',
-    image: 'images/12_ambient.png'
+    image: 'images/12_ambient.png',
+    figureRef: { text: 'Fleming et al. (2023) Nat Methods', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9789184/' }
   },
   {
     id: 13,
@@ -149,7 +161,8 @@ const topics = [
     explanation: 'This detection bias is a biological signature of cell-type commitment to long-gene programs. Neurons and adipocytes express many long genes — the snRNA-seq "bias" actually enhances detection of these biologically important transcripts in tissues that are hard to dissociate.',
     genes: 'Intronic poly(A) stretches',
     reference: 'Mathys et al. (2022) PMC8805720',
-    image: 'images/13_genelength.png'
+    image: 'images/13_genelength.png',
+    figureRef: { text: 'Mathys et al. (2022) Genome Res', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8805720/' }
   }
 ];
 
@@ -266,8 +279,8 @@ function renderTopics() {
         </div>
         <div class="figure-wrap">
           <img src="${t.image}" alt="Figure for ${t.title}"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='none'">
-          <p class="caption">Figure: ${t.title}</p>
+               onerror="this.parentElement.style.display='none'">
+          <p class="caption">Source: <a href="${t.figureRef.url}" target="_blank" rel="noopener">${t.figureRef.text}</a></p>
         </div>
         <div class="vote-buttons" data-topic="${t.id}">
           <button class="vote-btn artifact ${voted==='artifact'?'selected':''}"
