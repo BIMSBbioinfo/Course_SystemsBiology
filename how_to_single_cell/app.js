@@ -131,30 +131,6 @@ const topics = [
     figureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' },
     revealImage: 'images/11_cellcycle_reveal.png',
     revealFigureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' }
-  },
-  {
-    id: 10,
-    title: 'Ambient RNA "Soup"',
-    artifact: 'You run SoupX on your data and find substantial ambient RNA contamination — cell-free mRNA present in droplets regardless of whether they contain a cell. You subtract this "soup" from your expression matrix. But is the ambient RNA just noise?',
-    signal: 'Ambient RNA composition is not random. Outlier transcripts (above Poisson expectation) represent co-packaged RNA in extracellular vesicles or cellular debris — a proxy for the tissue secretome.',
-    answer: 'both',
-    explanation: 'By analyzing empty droplet statistics, researchers found that "ambient" outliers often represent co-packaged RNA in extracellular vesicles. The "soup" serves as a proxy for the tissue\'s secretome and cellular breakdown patterns — an ecological variable, not just contamination.',
-    genes: 'Poisson model outliers',
-    reference: 'Noga et al. (2026) bioRxiv; Young & Beber (2020)',
-    image: 'images/12_ambient.png',
-    figureRef: { text: 'Fleming et al. (2023) Nat Methods', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9789184/' }
-  },
-  {
-    id: 11,
-    title: 'Gene Length Bias (snRNA-seq)',
-    artifact: 'You compare your snRNA-seq data with a published scRNA-seq dataset of the same tissue and notice that your nuclear data preferentially detects longer genes. Is this a technical bias that needs correction, or is it telling you something about these cells?',
-    signal: 'Longer genes are associated with complex neuronal functions and synaptic development. The "bias" provides a high-resolution view of long-gene transcriptional programs in brain and adipose tissue.',
-    answer: 'both',
-    explanation: 'This detection bias is a biological signature of cell-type commitment to long-gene programs. Neurons and adipocytes express many long genes — the snRNA-seq "bias" actually enhances detection of these biologically important transcripts in tissues that are hard to dissociate.',
-    genes: 'Intronic poly(A) stretches',
-    reference: 'Mathys et al. (2022) PMC8805720',
-    image: 'images/13_genelength.png',
-    figureRef: { text: 'Mathys et al. (2022) Genome Res', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8805720/' }
   }
 ];
 
