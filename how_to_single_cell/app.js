@@ -30,7 +30,9 @@ const topics = [
     genes: 'HBB, HBA1, SPP1',
     reference: 'Liu et al. (2024) PMC11687149',
     image: 'images/02_hemoglobin.png',
-    figureRef: { text: 'Liu et al. (2024) Front Immunol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11687149/' }
+    figureRef: { text: 'Liu et al. (2024) Front Immunol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11687149/' },
+    revealImage: 'images/02_hemoglobin_reveal.png',
+    revealFigureRef: { text: 'Liu et al. (2024) Front Immunol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11687149/' }
   },
   {
     id: 3,
@@ -42,7 +44,9 @@ const topics = [
     genes: 'MALAT1',
     reference: 'Mattick et al. (2024) bioRxiv',
     image: 'images/03_malat1.png',
-    figureRef: { text: 'Montserrat-Ayuso & Esteve-Codina (2024) BMC Genomics', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11580415/' }
+    figureRef: { text: 'Montserrat-Ayuso & Esteve-Codina (2024) BMC Genomics', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11580415/' },
+    revealImage: 'images/03_malat1_reveal.png',
+    revealFigureRef: { text: 'Montserrat-Ayuso & Esteve-Codina (2024) BMC Genomics', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11580415/' }
   },
   {
     id: 4,
@@ -82,7 +86,9 @@ const topics = [
     genes: 'Low complexity distribution',
     reference: 'Subramanian et al. (2022) PMC9793662',
     image: 'images/08_low_umi.png',
-    figureRef: { text: 'Subramanian et al. (2022) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9793662/' }
+    figureRef: { text: 'Subramanian et al. (2022) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9793662/' },
+    revealImage: 'images/08_low_umi_reveal.png',
+    revealFigureRef: { text: 'Subramanian et al. (2022) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9793662/' }
   },
   {
     id: 7,
@@ -108,7 +114,9 @@ const topics = [
     genes: 'Unspliced vs. spliced transcript ratio',
     reference: 'La Manno et al. (2018); Bergen et al. (2020)',
     image: 'images/10_intronic.png',
-    figureRef: { text: 'La Manno et al. (2018) Nature', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6130801/' }
+    figureRef: { text: 'La Manno et al. (2018) Nature', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6130801/' },
+    revealImage: 'images/10_intronic_reveal.png',
+    revealFigureRef: { text: 'La Manno et al. (2018) Nature', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6130801/' }
   },
   {
     id: 9,
@@ -120,7 +128,9 @@ const topics = [
     genes: 'RORC, IFNG (Th17 trajectories)',
     reference: 'Zhao et al. (2023) PMC10300431',
     image: 'images/11_cellcycle.png',
-    figureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' }
+    figureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' },
+    revealImage: 'images/11_cellcycle_reveal.png',
+    revealFigureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' }
   },
   {
     id: 10,
