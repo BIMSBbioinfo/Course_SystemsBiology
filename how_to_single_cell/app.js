@@ -50,7 +50,7 @@ const topics = [
   },
   {
     id: 4,
-    title: 'Dissociation-Induced Stress Genes',
+    title: 'Differential Expression of IEGs',
     artifact: 'You observe strong expression of immediate-early genes (FOS, JUN, ATF3) in a subpopulation of muscle satellite cells. What could be the cause of this upregulation?',
     signal: 'The dissociation response reveals stem cell activation biology. Muscle satellite cells enter "early activation" during dissociation — the stress response maps cellular sensitivity to microenvironmental changes.',
     answer: 'both',
