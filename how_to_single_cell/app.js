@@ -18,7 +18,7 @@ const topics = [
     genes: 'RGS5, MYL9, MIRO1',
     reference: 'Osorio-Querejeta et al. (2021); Chen et al. (2024) Cancer Res',
     image: 'images/01_mitochondria.png',
-    figureRef: { text: 'Hippen et al. (2021) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8599307/' }
+    figureRef: { text: 'Hippen et al. (2025) Genome Biol', url: 'https://doi.org/10.1186/s13059-025-03559-w' }
   },
   {
     id: 2,
@@ -47,14 +47,16 @@ const topics = [
   {
     id: 4,
     title: 'Dissociation-Induced Stress Genes',
-    artifact: 'You observe strong expression of immediate-early genes (FOS, JUN, ATF3) across many cell types after enzymatic tissue dissociation at 37°C. These 512 stress genes overlap with inflammation and apoptosis signatures. Is your biological signal real, or an artifact of sample processing?',
+    artifact: 'You observe strong expression of immediate-early genes (FOS, JUN, ATF3) in a subpopulation of muscle satellite cells. What could be the cause of this upregulation?',
     signal: 'The dissociation response reveals stem cell activation biology. Muscle satellite cells enter "early activation" during dissociation — the stress response maps cellular sensitivity to microenvironmental changes.',
     answer: 'both',
     explanation: 'The 512-gene stress signature (HSPs, IEGs) is technically induced by collagenase at 37°C. However, in quiescent stem cells, this response is the biological initiation of the regenerative program. Cold protease protocols can separate technical from biological stress.',
     genes: 'FOS, JUN, ATF3, FOSB, JUNB',
     reference: 'Adam et al. (2017) Genome Biol; van den Brink et al. (2017)',
     image: 'images/04_dissociation.png',
-    figureRef: { text: 'Adam et al. (2017) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6796327/' }
+    figureRef: { text: 'van den Brink et al. (2017) Nat Methods', url: 'https://www.hubrecht.eu/app/uploads/2017/11/VanOudenaarden_Key_2017-VanDenBrink_Single-cell-sequencing-reveals-dissociation-induced-gene-expression-in-tissue-subpopulations.pdf' },
+    revealImage: 'images/04_dissociation_reveal.png',
+    revealFigureRef: { text: 'van den Brink et al. (2017) Fig 1C', url: 'https://www.hubrecht.eu/app/uploads/2017/11/VanOudenaarden_Key_2017-VanDenBrink_Single-cell-sequencing-reveals-dissociation-induced-gene-expression-in-tissue-subpopulations.pdf' }
   },
   {
     id: 5,
@@ -66,34 +68,12 @@ const topics = [
     genes: 'CD48, H2-K1, H2-D1 (MHC-I/II)',
     reference: 'Bais et al. (2023) PMC10516525',
     image: 'images/05_doublets.png',
-    figureRef: { text: 'Bais et al. (2023) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10516525/' }
+    figureRef: { text: 'OSCA Bioconductor — Doublet Detection', url: 'https://bioconductor.org/books/3.15/OSCA.advanced/doublet-detection.html' },
+    revealImage: 'images/05_doublets_reveal.png',
+    revealFigureRef: { text: 'Bais et al. (2023) Genome Biol — CIcADA', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10516525/' }
   },
   {
     id: 6,
-    title: 'Platelet Marker Contamination',
-    artifact: 'You find platelet markers PPBP and PF4 expressed in your monocyte and neutrophil clusters. Your first thought is poor platelet depletion during sample preparation. Should you regress these out or filter the affected cells?',
-    signal: 'Platelet-leukocyte aggregates are functional innate immune units that increase during infections (COVID-19, HIV), sepsis, and thrombotic events. Their transcripts indicate platelet-mediated immune modulation.',
-    answer: 'both',
-    explanation: 'Platelet "contamination" in leukocyte clusters often reflects real platelet-leukocyte aggregates — biologically relevant formations during inflammation. In acute MI patients, the platelet transcriptome correlates with clinical reactivity and aggregation.',
-    genes: 'PPBP, PF4, ITGA2, PDGFB',
-    reference: 'Burkhart et al. (2016) PMC4933502; Kral et al. (2022)',
-    image: 'images/06_platelets.png',
-    figureRef: { text: 'Almeida et al. (2024) Int J Mol Sci', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11173046/' }
-  },
-  {
-    id: 7,
-    title: 'Spatial Autofluorescence',
-    artifact: 'You are running a spatial transcriptomics experiment on adult brain tissue and observe strong background autofluorescence that overlaps with your fluorophore channels (570–640 nm). You plan to quench it with Sudan Black. But what is generating this signal?',
-    signal: 'Lipofuscin — the major source of autofluorescence — is a definitive biological hallmark of aging and senescence. Its spatial distribution near amyloid-beta plaques reveals disrupted autophagy in Alzheimer\'s disease.',
-    answer: 'both',
-    explanation: 'Lipofuscin accumulates in lysosomes of post-mitotic cells (neurons, cardiomyocytes) from incomplete degradation. While technically problematic (emission 570-640nm overlaps fluorophores), it maps cellular "wear and tear" and senescence — quenching it removes this biological information.',
-    genes: 'Lipofuscin (broad-spectrum pigment)',
-    reference: 'Chen et al. (2025) PMC12699879',
-    image: 'images/07_autofluorescence.png',
-    figureRef: { text: 'Chen et al. (2025) Ageing Res Rev', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12699879/' }
-  },
-  {
-    id: 8,
     title: 'Low UMI / Gene Counts',
     artifact: 'A large population of cells in your dataset falls below your minimum UMI and gene count thresholds. Your QC pipeline labels them as empty droplets or failed captures and removes them. Could you be throwing away real cells?',
     signal: 'Low transcriptional diversity is a hallmark of quiescence. Long-term engrafting HSPCs, naive T cells, and mature neutrophils have genuinely low RNA content — removing them biases atlases toward activated cell types.',
@@ -105,7 +85,7 @@ const topics = [
     figureRef: { text: 'Subramanian et al. (2022) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9793662/' }
   },
   {
-    id: 9,
+    id: 7,
     title: 'Ribosomal Protein Gene Fraction',
     artifact: 'You notice that ribosomal protein genes account for a large fraction of reads in certain cell clusters. A colleague suggests regressing them out as housekeeping noise or a batch effect. Is the variation in RP genes really just technical?',
     signal: 'Ribosomes are not homogeneous. RP genes show dynamic compositional heterogeneity across tissues and cell states. High RP content in naive T cells reflects translational demand for rapid clonal expansion.',
@@ -114,10 +94,12 @@ const topics = [
     genes: 'RPLP1, RPS27, RPL36A, RPLP0',
     reference: 'Gupta et al. (2025) bioRxiv; Subramanian et al. (2022)',
     image: 'images/09_ribosomal.png',
-    figureRef: { text: 'Guimaraes & Zavolan (2016) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5123215/' }
+    figureRef: { text: 'Guimaraes & Zavolan (2016) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5123215/' },
+    revealImage: 'images/09_ribosomal_reveal.png',
+    revealFigureRef: { text: 'Guimaraes & Zavolan (2016) Fig 4C-D', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5123215/#Fig4' }
   },
   {
-    id: 10,
+    id: 8,
     title: 'Intronic Reads',
     artifact: 'A significant fraction of your reads map to intronic regions rather than exons. Your pipeline documentation says these are genomic DNA contamination or ambient nuclear RNA, and recommends filtering them out. Should you?',
     signal: 'Intronic reads represent nascent unspliced mRNA. RNA velocity uses the unspliced/spliced ratio to predict future cell states. In snRNA-seq, intronic reads (~40% of library) reflect transcriptional momentum.',
@@ -129,7 +111,7 @@ const topics = [
     figureRef: { text: 'La Manno et al. (2018) Nature', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6130801/' }
   },
   {
-    id: 11,
+    id: 9,
     title: 'Cell Cycle Gene Signatures',
     artifact: 'Cell cycle genes dominate your clustering — you see large S-phase and G2M clusters that obscure the cell-type differences you are interested in. You decide to regress out cell cycle scores. But are you removing noise, or deleting biology?',
     signal: 'Cell cycle is a fundamental biological variable. In Th17 populations, trajectory analysis reveals "effector", "proliferating", and "stem-like" subsets. Regressing out cell cycle deletes these functional dynamics.',
@@ -141,7 +123,7 @@ const topics = [
     figureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' }
   },
   {
-    id: 12,
+    id: 10,
     title: 'Ambient RNA "Soup"',
     artifact: 'You run SoupX on your data and find substantial ambient RNA contamination — cell-free mRNA present in droplets regardless of whether they contain a cell. You subtract this "soup" from your expression matrix. But is the ambient RNA just noise?',
     signal: 'Ambient RNA composition is not random. Outlier transcripts (above Poisson expectation) represent co-packaged RNA in extracellular vesicles or cellular debris — a proxy for the tissue secretome.',
@@ -153,7 +135,7 @@ const topics = [
     figureRef: { text: 'Fleming et al. (2023) Nat Methods', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9789184/' }
   },
   {
-    id: 13,
+    id: 11,
     title: 'Gene Length Bias (snRNA-seq)',
     artifact: 'You compare your snRNA-seq data with a published scRNA-seq dataset of the same tissue and notice that your nuclear data preferentially detects longer genes. Is this a technical bias that needs correction, or is it telling you something about these cells?',
     signal: 'Longer genes are associated with complex neuronal functions and synaptic development. The "bias" provides a high-resolution view of long-gene transcriptional programs in brain and adipose tissue.',
@@ -175,6 +157,20 @@ function saveVote(topicId, choice) {
   const votes = loadVotes();
   votes[topicId] = choice;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+}
+
+const ANSWERS_KEY = 'artifact_signal_answers';
+function loadAnswers() {
+  try { return JSON.parse(localStorage.getItem(ANSWERS_KEY)) || {}; }
+  catch { return {}; }
+}
+function loadAnswer(topicId) {
+  return loadAnswers()[topicId] || '';
+}
+function saveAnswer(topicId, text) {
+  const answers = loadAnswers();
+  answers[topicId] = text;
+  localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
 }
 
 /* ---------- DOM helpers ---------- */
@@ -236,11 +232,11 @@ function renderLanding() {
   page.innerHTML = `
     <div class="landing">
       <h2>Artifact or Signal?</h2>
-      <p style="color:var(--text-light);margin:.5rem 0;">13 things your QC pipeline throws away.<br>Are they noise — or biology?</p>
+      <p style="color:var(--text-light);margin:.5rem 0;">${topics.length} things your QC pipeline throws away.<br>Are they noise — or biology?</p>
       <div class="qr-wrap" id="qr-code"></div>
       <p class="instructions">Scan the QR code on your phone to participate</p>
-      <div class="progress-bar"><div class="fill" style="width:${(voted/13*100).toFixed(0)}%"></div></div>
-      <p class="progress-text">${voted}/13 topics voted</p>
+      <div class="progress-bar"><div class="fill" style="width:${(voted/topics.length*100).toFixed(0)}%"></div></div>
+      <p class="progress-text">${voted}/${topics.length} topics voted</p>
       <button class="start-btn" onclick="showPage('topic-1')">Start Voting</button>
     </div>
   `;
@@ -263,7 +259,7 @@ function renderTopics() {
   wrap.innerHTML = '';
   const votes = loadVotes();
 
-  topics.forEach(t => {
+  topics.forEach((t, idx) => {
     const voted = votes[t.id];
     const div = document.createElement('div');
     div.className = 'page';
@@ -271,7 +267,7 @@ function renderTopics() {
     div.innerHTML = `
       <div class="topic-card">
         <div class="topic-header">
-          <span class="topic-number">Topic ${t.id} of 13</span>
+          <span class="topic-number">Topic ${t.id} of ${topics.length}</span>
           <h2>${t.title}</h2>
         </div>
         <div class="description">
@@ -282,34 +278,41 @@ function renderTopics() {
                onerror="this.parentElement.style.display='none'">
           <p class="caption">Source: <a href="${t.figureRef.url}" target="_blank" rel="noopener">${t.figureRef.text}</a></p>
         </div>
+        <div class="answer-input" data-topic="${t.id}">
+          <label class="answer-label">What do you think?</label>
+          <textarea class="answer-text" placeholder="Write your reasoning here..."
+                    data-topic="${t.id}" ${voted?'disabled':''}>${loadAnswer(t.id)}</textarea>
+        </div>
         <div class="vote-buttons" data-topic="${t.id}">
           <button class="vote-btn artifact ${voted==='artifact'?'selected':''}"
                   data-choice="artifact" ${voted?'disabled':''}>
-            Technical Artifact
+            Mostly Technical
           </button>
           <button class="vote-btn signal ${voted==='signal'?'selected':''}"
                   data-choice="signal" ${voted?'disabled':''}>
-            Biological Signal
-          </button>
-          <button class="vote-btn both-btn ${voted==='both'?'selected':''}"
-                  data-choice="both" ${voted?'disabled':''}>
-            Both
+            Mostly Biology
           </button>
         </div>
         <div class="vote-recorded ${voted?'show':''}" id="recorded-${t.id}" ${IS_TEACHER?'style="display:none"':''}>
           <p>Vote recorded! Watch the screen for the answer.</p>
         </div>
         <div class="result-reveal ${IS_TEACHER && voted?'show':''}" id="reveal-${t.id}" ${!IS_TEACHER?'style="display:none !important"':''}>
-          <span class="answer-badge both">Answer: Both!</span>
+          <span class="answer-badge both">Answer: It's both!</span>
           <p class="signal-text"><strong>The biological signal:</strong> ${t.signal}</p>
+          ${t.revealImage ? `
+          <div class="figure-wrap" style="margin-top:.75rem">
+            <img src="${t.revealImage}" alt="Reveal figure for ${t.title}"
+                 onerror="this.parentElement.style.display='none'">
+            ${t.revealFigureRef ? `<p class="caption">Source: <a href="${t.revealFigureRef.url}" target="_blank" rel="noopener">${t.revealFigureRef.text}</a></p>` : ''}
+          </div>` : ''}
           <p class="explanation" style="margin-top:.75rem">${t.explanation}</p>
           <p class="reference">Key genes: ${t.genes}<br>Ref: ${t.reference}</p>
           <div class="vote-bar-chart" id="chart-${t.id}"></div>
         </div>
       </div>
       <div style="display:flex;gap:.5rem;justify-content:center;padding:1rem 0">
-        ${t.id > 1 ? `<button class="start-btn" style="font-size:.85rem;padding:.5rem 1.5rem" onclick="showPage('topic-${t.id-1}')">Previous</button>` : ''}
-        ${t.id < 13 ? `<button class="start-btn" style="font-size:.85rem;padding:.5rem 1.5rem" onclick="showPage('topic-${t.id+1}')">Next</button>` : `<button class="start-btn" style="font-size:.85rem;padding:.5rem 1.5rem" onclick="renderResults();showPage('results')">See Results</button>`}
+        ${idx > 0 ? `<button class="start-btn" style="font-size:.85rem;padding:.5rem 1.5rem" onclick="showPage('topic-${topics[idx-1].id}')">Previous</button>` : ''}
+        ${idx < topics.length - 1 ? `<button class="start-btn" style="font-size:.85rem;padding:.5rem 1.5rem" onclick="showPage('topic-${topics[idx+1].id}')">Next</button>` : `<button class="start-btn" style="font-size:.85rem;padding:.5rem 1.5rem" onclick="renderResults();showPage('results')">See Results</button>`}
       </div>
     `;
     wrap.appendChild(div);
@@ -321,6 +324,13 @@ function renderTopics() {
     const container = e.target.closest('.vote-buttons');
     const topicId = parseInt(container.dataset.topic);
     const choice = e.target.dataset.choice;
+
+    // Save text answer
+    const textarea = document.querySelector(`.answer-text[data-topic="${topicId}"]`);
+    if (textarea) {
+      saveAnswer(topicId, textarea.value);
+      textarea.disabled = true;
+    }
 
     saveVote(topicId, choice);
 
@@ -345,6 +355,13 @@ function renderTopics() {
     renderVoteChart(topicId);
   });
 
+  // Auto-save textarea on input
+  document.addEventListener('input', e => {
+    if (!e.target.matches('.answer-text')) return;
+    const topicId = parseInt(e.target.dataset.topic);
+    saveAnswer(topicId, e.target.value);
+  });
+
   // Render charts for already-voted topics
   Object.keys(votes).forEach(id => renderVoteChart(parseInt(id)));
 }
@@ -354,32 +371,28 @@ function renderVoteChart(topicId) {
   const chart = $(`#chart-${topicId}`);
   if (!chart) return;
 
-  // Simulate aggregate votes (since no server, show own vote + some distribution)
   const myVote = votes[topicId];
   if (!myVote) return;
 
-  // Create a plausible distribution
+  // Plausible distributions (2 choices only)
   const distributions = {
-    1:  { artifact: 45, signal: 15, both: 40 },
-    2:  { artifact: 55, signal: 20, both: 25 },
-    3:  { artifact: 40, signal: 20, both: 40 },
-    4:  { artifact: 50, signal: 15, both: 35 },
-    5:  { artifact: 60, signal: 10, both: 30 },
-    6:  { artifact: 50, signal: 20, both: 30 },
-    7:  { artifact: 55, signal: 15, both: 30 },
-    8:  { artifact: 45, signal: 25, both: 30 },
-    9:  { artifact: 50, signal: 15, both: 35 },
-    10: { artifact: 35, signal: 30, both: 35 },
-    11: { artifact: 40, signal: 25, both: 35 },
-    12: { artifact: 55, signal: 15, both: 30 },
-    13: { artifact: 45, signal: 20, both: 35 }
+    1:  { artifact: 55, signal: 45 },
+    2:  { artifact: 60, signal: 40 },
+    3:  { artifact: 50, signal: 50 },
+    4:  { artifact: 60, signal: 40 },
+    5:  { artifact: 65, signal: 35 },
+    6:  { artifact: 55, signal: 45 },
+    7:  { artifact: 55, signal: 45 },
+    8:  { artifact: 50, signal: 50 },
+    9:  { artifact: 45, signal: 55 },
+    10: { artifact: 60, signal: 40 },
+    11: { artifact: 50, signal: 50 }
   };
 
-  const dist = distributions[topicId];
+  const dist = distributions[topicId] || { artifact: 50, signal: 50 };
   chart.innerHTML = `
     <div class="bar artifact" style="flex:${dist.artifact}">${dist.artifact}%</div>
     <div class="bar signal" style="flex:${dist.signal}">${dist.signal}%</div>
-    <div class="bar both" style="flex:${dist.both}">${dist.both}%</div>
   `;
 }
 
@@ -390,16 +403,15 @@ function renderResults() {
 
   let cards = topics.map(t => {
     const v = votes[t.id];
-    const correct = v === t.answer;
-    const voteLabel = v ? (v === 'both' ? 'Both' : v === 'artifact' ? 'Technical Artifact' : 'Biological Signal') : 'Not voted';
-    const voteColor = !v ? 'var(--text-light)' : correct ? 'var(--success)' : 'var(--warning)';
+    const voteLabel = v ? (v === 'artifact' ? 'Mostly Technical' : 'Mostly Biology') : 'Not voted';
+    const voteColor = !v ? 'var(--text-light)' : v === 'artifact' ? 'var(--warning)' : 'var(--success)';
 
     return `
       <div class="result-summary-card" onclick="showPage('topic-${t.id}')" style="cursor:pointer">
         <h3><span style="color:var(--primary);font-weight:700">#${t.id}</span> ${t.title}</h3>
         <p class="your-vote" style="color:${voteColor}">Your vote: ${voteLabel}</p>
         <div class="vote-bar-chart" style="height:20px">
-          ${v ? `<div class="bar artifact" style="flex:1">A</div><div class="bar signal" style="flex:1">S</div><div class="bar both" style="flex:1">B</div>` : '<div style="flex:1;background:var(--border);border-radius:6px"></div>'}
+          ${v ? `<div class="bar artifact" style="flex:1">Tech</div><div class="bar signal" style="flex:1">Bio</div>` : '<div style="flex:1;background:var(--border);border-radius:6px"></div>'}
         </div>
       </div>
     `;
@@ -408,8 +420,8 @@ function renderResults() {
   page.innerHTML = `
     <div style="padding:1.5rem 0">
       <h2 style="text-align:center;margin-bottom:.5rem">Your Results</h2>
-      <div class="progress-bar"><div class="fill" style="width:${(voted/13*100).toFixed(0)}%"></div></div>
-      <p class="progress-text">${voted}/13 topics voted</p>
+      <div class="progress-bar"><div class="fill" style="width:${(voted/topics.length*100).toFixed(0)}%"></div></div>
+      <p class="progress-text">${voted}/${topics.length} topics voted</p>
       <div class="results-grid">${cards}</div>
       <div style="text-align:center;padding:1rem 0">
         <button class="start-btn" style="background:var(--warning)" onclick="if(confirm('Reset all votes?')){localStorage.removeItem('${STORAGE_KEY}');location.reload()}">
@@ -455,8 +467,8 @@ function renderTeacher() {
   const totalVoters = allVotes._count || 0;
 
   let rows = topics.map(t => {
-    const counts = allVotes[t.id] || { artifact: 0, signal: 0, both: 0 };
-    const total = counts.artifact + counts.signal + counts.both;
+    const counts = allVotes[t.id] || { artifact: 0, signal: 0 };
+    const total = counts.artifact + counts.signal;
     const pct = (v) => total > 0 ? Math.round(v / total * 100) : 0;
 
     return `
@@ -468,30 +480,23 @@ function renderTeacher() {
         </div>
         <div class="teacher-bars">
           <div class="teacher-bar-row">
-            <span class="teacher-bar-label">Artifact</span>
+            <span class="teacher-bar-label">Technical</span>
             <div class="teacher-bar-track">
               <div class="teacher-bar-fill artifact" style="width:${pct(counts.artifact)}%"></div>
             </div>
             <span class="teacher-bar-pct">${pct(counts.artifact)}%</span>
           </div>
           <div class="teacher-bar-row">
-            <span class="teacher-bar-label">Signal</span>
+            <span class="teacher-bar-label">Biology</span>
             <div class="teacher-bar-track">
               <div class="teacher-bar-fill signal" style="width:${pct(counts.signal)}%"></div>
             </div>
             <span class="teacher-bar-pct">${pct(counts.signal)}%</span>
           </div>
-          <div class="teacher-bar-row">
-            <span class="teacher-bar-label">Both</span>
-            <div class="teacher-bar-track">
-              <div class="teacher-bar-fill both" style="width:${pct(counts.both)}%"></div>
-            </div>
-            <span class="teacher-bar-pct">${pct(counts.both)}%</span>
-          </div>
         </div>
         <button class="teacher-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show');this.textContent=this.textContent==='Show Answer'?'Hide Answer':'Show Answer'">Show Answer</button>
         <div class="teacher-answer">
-          <span class="answer-badge both">Answer: Both!</span>
+          <span class="answer-badge both">Answer: It's both!</span>
           <p>${t.explanation}</p>
         </div>
       </div>
@@ -554,7 +559,7 @@ function getAllDeviceVotes() {
       try {
         const devVotes = JSON.parse(localStorage.getItem(key));
         for (const [topicId, choice] of Object.entries(devVotes)) {
-          if (!aggregate[topicId]) aggregate[topicId] = { artifact: 0, signal: 0, both: 0 };
+          if (!aggregate[topicId]) aggregate[topicId] = { artifact: 0, signal: 0 };
           if (aggregate[topicId][choice] !== undefined) {
             aggregate[topicId][choice]++;
           }

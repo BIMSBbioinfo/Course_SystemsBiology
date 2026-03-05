@@ -152,6 +152,42 @@ header p { opacity: .9; font-size: .95rem; }
   margin-top: .4rem;
 }
 
+/* === Answer text input === */
+.answer-input {
+  padding: 0 1.25rem 1rem;
+}
+.answer-label {
+  display: block;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: .4rem;
+}
+.answer-text {
+  width: 100%;
+  min-height: 60px;
+  padding: .6rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: .9rem;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+  resize: vertical;
+  transition: border-color .2s;
+}
+.answer-text:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.answer-text:disabled {
+  opacity: .7;
+  cursor: default;
+  background: var(--border);
+}
+
 /* === Vote buttons === */
 .vote-buttons {
   display: flex;

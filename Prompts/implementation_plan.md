@@ -116,15 +116,44 @@ The 13 topics (from documentation):
 - Answers only visible on teacher's projected screen (`?teacher=true`)
 - QR code always points to student URL (without `?teacher`)
 
-### Fix 4: Increase font on the question [TODO]
-**Files**: `style.css`
-- Increase font size of the technical artifact description text in `.topic-card .description`
+### Fix 4: Increase font on the question [DONE]
+- Description text increased to 1.15rem with darker color
 
-### Fix 5: Fix publication figures [TODO]
-**Files**: `images/`, `app.js`
-- Review each of the 13 figures for relevance and correctness
-- Replace irrelevant or cluttered figures with correct high-resolution ones (1 per topic)
-- Each figure should clearly showcase the specific technical artifact / biological signal example
+### Fix 5: Fix publication figures [DONE]
+- Replaced 5 irrelevant figures (MALAT1, platelets, ribosomal, intronic, ambient)
+- Added figure references with PMC links below each image
+
+### Fix 6: Rephrase as scenario questions [DONE]
+- All 13 topics rephrased as "You observe X..." style questions
+
+### Fix 7: Change vote buttons + add text input [DONE]
+**Files**: `app.js`, `style.css`
+- Replaced "Technical Artifact / Biological Signal / Both" with "Mostly Technical / Mostly Biology"
+- Added short text input box where students can write their reasoning (auto-saved to localStorage)
+- Removed "both" option from vote charts, results, and teacher dashboard
+- Updated all distributions for 11 topics / 2 choices
+
+### Fix 8: Update specific topics [DONE]
+**Files**: `app.js`, `images/`
+- **#1 Mitochondria**: Downloaded new figure from Hippen et al. (2025) Genome Biol (Springer paper)
+- **#4 Dissociation**: Using van den Brink Fig 1A (pre-vote), Fig 1C shown after results via `revealImage`. Updated question about muscle satellite cells.
+- **#5 Doublets**: Using OSCA Bioconductor doublet detection figure (pre-vote), CIcADA biological ref shown after results via `revealImage`
+
+### Fix 9: Remove topics #6 and #7 [DONE]
+**Files**: `app.js`
+- Removed topic #6 (Platelet contamination)
+- Removed topic #7 (Spatial autofluorescence / lipofuscin)
+- Renumbered remaining topics (13 → 11)
+
+### Fix 10: Image captions + reveal images [DONE]
+**Files**: `app.js`, `style.css`
+- Image captions shown below each figure with link to source
+- `revealImage` / `revealFigureRef` fields render different images in the answer reveal section
+- Applied to topics #4 (dissociation), #5 (doublets), #7 (ribosomal)
+
+### Fix 11: Ribosomal reveal figure [DONE]
+**Files**: `app.js`, `images/`
+- **#7 Ribosomal** (original #9): Added Fig 4C-D from Guimaraes & Zavolan (2016) as reveal image
 
 ---
 
