@@ -18,6 +18,7 @@ const topics = [
     genes: 'RGS5, MYL9, MIRO1',
     reference: 'Osorio-Querejeta et al. (2021); Chen et al. (2024) Cancer Res',
     image: 'images/01_mitochondria.png',
+    imageCaption: 'Comparison of mitochondrial RNA percentage (pctMT) between tumor microenvironment (TME) and malignant cells across 12 patients in (a) unfiltered cohorts and (b) cohorts with prior pctMT filtering in original studies.',
     figureRef: { text: 'Hippen et al. (2025) Genome Biol', url: 'https://doi.org/10.1186/s13059-025-03559-w' }
   },
   {
@@ -44,6 +45,7 @@ const topics = [
     genes: 'MALAT1',
     reference: 'Mattick et al. (2024) bioRxiv',
     image: 'images/03_malat1.png',
+    imageCaption: 'Expression of Malat1 in murine kidney.',
     figureRef: { text: 'Montserrat-Ayuso & Esteve-Codina (2024) BMC Genomics', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11580415/' },
     revealImage: 'images/03_malat1_reveal.png',
     revealFigureRef: { text: 'Montserrat-Ayuso & Esteve-Codina (2024) BMC Genomics', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11580415/' }
@@ -58,8 +60,10 @@ const topics = [
     genes: 'FOS, JUN, ATF3, FOSB, JUNB',
     reference: 'Adam et al. (2017) Genome Biol; van den Brink et al. (2017)',
     image: 'images/04_dissociation.png',
+    imageCaption: 'Heatmap (inset) showing transcriptome correlations of 235 freshly isolated single-cell sequenced SCs and scatterplot showing genes that are differentially expressed between the two identified subpopulations.',
     figureRef: { text: 'van den Brink et al. (2017) Nat Methods', url: 'https://www.hubrecht.eu/app/uploads/2017/11/VanOudenaarden_Key_2017-VanDenBrink_Single-cell-sequencing-reveals-dissociation-induced-gene-expression-in-tissue-subpopulations.pdf' },
     revealImage: 'images/04_dissociation_reveal.png',
+    revealImageCaption: 'Genes that are differentially expressed between 1-h and 2-h collagenase-treated SCs (n = 272 and 223 cells, respectively).',
     revealFigureRef: { text: 'van den Brink et al. (2017) Fig 1C', url: 'https://www.hubrecht.eu/app/uploads/2017/11/VanOudenaarden_Key_2017-VanDenBrink_Single-cell-sequencing-reveals-dissociation-induced-gene-expression-in-tissue-subpopulations.pdf' }
   },
   {
@@ -74,6 +78,7 @@ const topics = [
     image: 'images/05_doublets.png',
     figureRef: { text: 'OSCA Bioconductor — Doublet Detection', url: 'https://bioconductor.org/books/3.15/OSCA.advanced/doublet-detection.html' },
     revealImage: 'images/05_doublets_reveal.png',
+    revealImageCaption: 'Spatial plots showing the proportions of T cell and macrophage CAMML scores at each Visium spot in B16F10 data. Co-localization is the percent of spots where both cell type scores each make up at least 10% of the score for that spot.',
     revealFigureRef: { text: 'Bais et al. (2023) Genome Biol — CIcADA', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10516525/' }
   },
   {
@@ -86,8 +91,10 @@ const topics = [
     genes: 'Low complexity distribution',
     reference: 'Subramanian et al. (2022) PMC9793662',
     image: 'images/08_low_umi.png',
+    imageCaption: 'Number of features per cell in normal human lung cell atlas.',
     figureRef: { text: 'Subramanian et al. (2022) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9793662/' },
     revealImage: 'images/08_low_umi_reveal.png',
+    revealImageCaption: 'QC metrics vary by tissue.',
     revealFigureRef: { text: 'Subramanian et al. (2022) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9793662/' }
   },
   {
@@ -100,8 +107,10 @@ const topics = [
     genes: 'RPLP1, RPS27, RPL36A, RPLP0',
     reference: 'Gupta et al. (2025) bioRxiv; Subramanian et al. (2022)',
     image: 'images/09_ribosomal.png',
+    imageCaption: 'Heatmap depicting the standard score-normalized expression level of 90 RP genes across 28 human tissues. Paralog genes classified as canonical (blue) and non-canonical (red). RP genes with tissue-specific expression marked with a star.',
     figureRef: { text: 'Guimaraes & Zavolan (2016) Genome Biol', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5123215/' },
     revealImage: 'images/09_ribosomal_reveal.png',
+    revealImageCaption: 'PCA of RP specificity scores of mature cell types compared to HSCs identifies hematopoietic lineages (blue: lymphoid, orange: myeloid). Hierarchical clustering of specificity scores suggests several RP genes are co-regulated in different developmental lineages.',
     revealFigureRef: { text: 'Guimaraes & Zavolan (2016) Fig 4C-D', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5123215/#Fig4' }
   },
   {
@@ -114,6 +123,7 @@ const topics = [
     genes: 'Unspliced vs. spliced transcript ratio',
     reference: 'La Manno et al. (2018); Bergen et al. (2020)',
     image: 'images/10_intronic.png',
+    imageCaption: 'Examples of read density around intronic polyA and polyT sequences. Browser screenshots show reads from 10x Chromium, inDrop, and SMART-seq2 datasets, with gene annotation and polyA/polyT sequence positions.',
     figureRef: { text: 'La Manno et al. (2018) Nature', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6130801/' },
     revealImage: 'images/10_intronic_reveal.png',
     revealFigureRef: { text: 'La Manno et al. (2018) Nature', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6130801/' }
@@ -130,6 +140,7 @@ const topics = [
     image: 'images/11_cellcycle.png',
     figureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' },
     revealImage: 'images/11_cellcycle_reveal.png',
+    revealImageCaption: 'Cells in the human lung atlas colored by cell cycle phase.',
     revealFigureRef: { text: 'Zhao et al. (2023) J Exp Med', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10300431/' }
   }
 ];
@@ -261,6 +272,7 @@ function renderTopics() {
         <div class="figure-wrap">
           <img src="${t.image}" alt="Figure for ${t.title}"
                onerror="this.parentElement.style.display='none'">
+          ${t.imageCaption ? `<p class="caption">${t.imageCaption}</p>` : ''}
           <p class="caption">Source: <a href="${t.figureRef.url}" target="_blank" rel="noopener">${t.figureRef.text}</a></p>
         </div>
         <div class="answer-input" data-topic="${t.id}">
@@ -288,6 +300,7 @@ function renderTopics() {
           <div class="figure-wrap" style="margin-top:.75rem">
             <img src="${t.revealImage}" alt="Reveal figure for ${t.title}"
                  onerror="this.parentElement.style.display='none'">
+            ${t.revealImageCaption ? `<p class="caption">${t.revealImageCaption}</p>` : ''}
             ${t.revealFigureRef ? `<p class="caption">Source: <a href="${t.revealFigureRef.url}" target="_blank" rel="noopener">${t.revealFigureRef.text}</a></p>` : ''}
           </div>` : ''}
           <p class="explanation" style="margin-top:.75rem">${t.explanation}</p>
