@@ -1,10 +1,40 @@
 /* ============================================================
    Artifact or Signal — Interactive Voting App
-   All state persisted in localStorage (no server needed)
+   Votes persisted in localStorage + sent to Google Sheets
    ============================================================ */
 
 const STORAGE_KEY = 'artifact_signal_votes';
 const IS_TEACHER = new URLSearchParams(window.location.search).get('teacher') === 'true';
+
+/* ---------- Google Sheets integration ---------- */
+// Paste your Google Apps Script deployment URL here:
+const GOOGLE_SCRIPT_URL = '';
+
+function sendToSheet(topicId, vote, answer) {
+  if (!GOOGLE_SCRIPT_URL) return;
+  const topic = topics.find(t => t.id === topicId);
+  const payload = {
+    deviceId: getDeviceId(),
+    topicId: topicId,
+    topicTitle: topic ? topic.title : '',
+    vote: vote,
+    answer: answer || ''
+  };
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});  // silent fail — localStorage is the fallback
+}
+
+async function fetchSheetResults() {
+  if (!GOOGLE_SCRIPT_URL) return null;
+  try {
+    const resp = await fetch(GOOGLE_SCRIPT_URL);
+    return await resp.json();
+  } catch { return null; }
+}
 
 /* ---------- Topic data ---------- */
 const topics = [
@@ -332,6 +362,10 @@ function renderTopics() {
 
     saveVote(topicId, choice);
 
+    // Send to Google Sheet
+    const answerText = textarea ? textarea.value : '';
+    sendToSheet(topicId, choice, answerText);
+
     // highlight
     container.querySelectorAll('.vote-btn').forEach(b => {
       b.classList.remove('selected');
@@ -459,10 +493,19 @@ function updateNav() {
 }
 
 /* ---------- Teacher view ---------- */
-function renderTeacher() {
+async function renderTeacher() {
   const page = $('#page-teacher');
-  const allVotes = getAllDeviceVotes();
-  const totalVoters = allVotes._count || 0;
+
+  // Try Google Sheets first, fall back to localStorage
+  let allVotes, totalVoters;
+  const sheetData = await fetchSheetResults();
+  if (sheetData && sheetData.status === 'ok') {
+    allVotes = sheetData.results;
+    totalVoters = sheetData.deviceCount;
+  } else {
+    allVotes = getAllDeviceVotes();
+    totalVoters = allVotes._count || 0;
+  }
 
   let rows = topics.map(t => {
     const counts = allVotes[t.id] || { artifact: 0, signal: 0 };
