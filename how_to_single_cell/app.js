@@ -187,17 +187,17 @@ function init() {
 }
 
 function renderNav() {
-  const nav = $('.nav-tabs');
+  const nav = $('.nav-sidebar');
   // Home button
   const homeBtn = document.createElement('button');
-  homeBtn.textContent = 'Home';
+  homeBtn.innerHTML = 'Home';
   homeBtn.dataset.page = 'landing';
   homeBtn.addEventListener('click', () => showPage('landing'));
   nav.appendChild(homeBtn);
 
   topics.forEach(t => {
     const btn = document.createElement('button');
-    btn.textContent = `#${t.id}`;
+    btn.innerHTML = `<span class="nav-num">#${t.id}</span><span class="nav-title"> ${t.title}</span>`;
     btn.dataset.page = `topic-${t.id}`;
     btn.dataset.topicId = t.id;
     btn.addEventListener('click', () => showPage(`topic-${t.id}`));
@@ -218,7 +218,6 @@ function renderNav() {
     teachBtn.dataset.page = 'teacher';
     teachBtn.style.background = '#7c3aed';
     teachBtn.style.color = 'white';
-    teachBtn.style.borderColor = '#7c3aed';
     teachBtn.addEventListener('click', () => { renderTeacher(); showPage('teacher'); });
     nav.appendChild(teachBtn);
   }
@@ -438,14 +437,14 @@ function showPage(pageId) {
   if (target) target.classList.add('active');
 
   // update nav
-  $$('.nav-tabs button').forEach(b => {
+  $$('.nav-sidebar button').forEach(b => {
     b.classList.remove('active');
     if (b.dataset.page === pageId) b.classList.add('active');
   });
   updateNav();
 
   // scroll nav button into view
-  const activeBtn = $(`.nav-tabs button[data-page="${pageId}"]`);
+  const activeBtn = $(`.nav-sidebar button[data-page="${pageId}"]`);
   if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -453,7 +452,7 @@ function showPage(pageId) {
 
 function updateNav() {
   const votes = loadVotes();
-  $$('.nav-tabs button[data-topic-id]').forEach(btn => {
+  $$('.nav-sidebar button[data-topic-id]').forEach(btn => {
     if (votes[btn.dataset.topicId]) {
       btn.classList.add('voted');
     }
