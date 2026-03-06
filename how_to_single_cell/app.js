@@ -537,8 +537,14 @@ async function renderTeacher() {
         </div>
         <button class="teacher-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show');this.textContent=this.textContent==='Show Answer'?'Hide Answer':'Show Answer'">Show Answer</button>
         <div class="teacher-answer">
-          <span class="answer-badge both">Answer: It's both!</span>
           <p>${t.explanation}</p>
+          ${t.revealImage ? `
+          <div class="figure-wrap" style="margin-top:.75rem">
+            <img src="${t.revealImage}" alt="Reveal figure for ${t.title}" style="max-width:100%;border-radius:8px;border:1px solid var(--border)"
+                 onerror="this.parentElement.style.display='none'">
+            ${t.revealImageCaption ? `<p class="caption">${t.revealImageCaption}</p>` : ''}
+            ${t.revealFigureRef ? `<p class="caption">Source: <a href="${t.revealFigureRef.url}" target="_blank" rel="noopener">${t.revealFigureRef.text}</a></p>` : ''}
+          </div>` : ''}
         </div>
       </div>
     `;
