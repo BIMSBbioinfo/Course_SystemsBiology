@@ -8,7 +8,7 @@ const IS_TEACHER = new URLSearchParams(window.location.search).get('teacher') ==
 
 /* ---------- Google Sheets integration ---------- */
 // Paste your Google Apps Script deployment URL here:
-const GOOGLE_SCRIPT_URL = '';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCe2CyUuBOc6ZVMx_vkC0TrW5GQh3t1_yT1GdID9ux3SzQ1Utc3TLU819BO49tzzmZRw/exec';
 
 function sendToSheet(topicId, vote, answer) {
   if (!GOOGLE_SCRIPT_URL) return;
