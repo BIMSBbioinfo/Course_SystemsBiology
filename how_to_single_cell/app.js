@@ -20,12 +20,12 @@ function sendToSheet(topicId, vote, answer) {
     vote: vote,
     answer: answer || ''
   };
-  fetch(GOOGLE_SCRIPT_URL, {
+  // Use URL params to avoid CORS issues with Google Apps Script redirects
+  const params = new URLSearchParams(payload).toString();
+  fetch(GOOGLE_SCRIPT_URL + '?' + params, {
     method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).catch(() => {});  // silent fail — localStorage is the fallback
+    mode: 'no-cors'
+  }).catch(err => console.warn('Sheet send failed:', err));
 }
 
 async function fetchSheetResults() {

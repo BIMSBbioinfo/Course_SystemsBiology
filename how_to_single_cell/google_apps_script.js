@@ -17,7 +17,14 @@
 
 function doPost(e) {
   try {
-    var data = JSON.parse(e.postData.contents);
+    // Read from URL parameters (works with no-cors mode)
+    var data = e.parameter || {};
+
+    // Fall back to JSON body if no URL params
+    if (!data.deviceId && e.postData && e.postData.contents) {
+      try { data = JSON.parse(e.postData.contents); } catch(ex) {}
+    }
+
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
     // Add header if sheet is empty
