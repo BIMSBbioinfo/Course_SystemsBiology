@@ -13,25 +13,25 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCe2CyUuBOc6
 function sendToSheet(topicId, vote, answer) {
   if (!GOOGLE_SCRIPT_URL) return;
   const topic = topics.find(t => t.id === topicId);
-  const payload = {
+  const params = new URLSearchParams({
+    action: 'vote',
     deviceId: getDeviceId(),
     topicId: topicId,
     topicTitle: topic ? topic.title : '',
     vote: vote,
     answer: answer || ''
-  };
-  // Use URL params to avoid CORS issues with Google Apps Script redirects
-  const params = new URLSearchParams(payload).toString();
-  fetch(GOOGLE_SCRIPT_URL + '?' + params, {
-    method: 'POST',
-    mode: 'no-cors'
-  }).catch(err => console.warn('Sheet send failed:', err));
+  }).toString();
+  // GET request avoids CORS issues with Google Apps Script redirects
+  fetch(GOOGLE_SCRIPT_URL + '?' + params)
+    .then(r => r.json())
+    .then(d => console.log('Sheet:', d.status))
+    .catch(err => console.warn('Sheet send failed:', err));
 }
 
 async function fetchSheetResults() {
   if (!GOOGLE_SCRIPT_URL) return null;
   try {
-    const resp = await fetch(GOOGLE_SCRIPT_URL);
+    const resp = await fetch(GOOGLE_SCRIPT_URL + '?action=results');
     return await resp.json();
   } catch { return null; }
 }
@@ -245,7 +245,7 @@ function renderNav() {
     teachBtn.dataset.page = 'teacher';
     teachBtn.style.background = '#7c3aed';
     teachBtn.style.color = 'white';
-    teachBtn.addEventListener('click', () => { renderTeacher(); showPage('teacher'); });
+    teachBtn.addEventListener('click', () => { renderTeacher(); showPage('teacher'); startTeacherAutoRefresh(); });
     nav.appendChild(teachBtn);
   }
 }
@@ -571,6 +571,43 @@ function revealAllAnswers() {
   $$('.teacher-reveal-btn').forEach(btn => btn.textContent = 'Hide Answer');
 }
 
+/* ---------- Teacher auto-refresh ---------- */
+let teacherRefreshInterval = null;
+function startTeacherAutoRefresh() {
+  stopTeacherAutoRefresh();
+  teacherRefreshInterval = setInterval(async () => {
+    // Only refresh if teacher page is visible
+    const teacherPage = $('#page-teacher');
+    if (teacherPage && teacherPage.classList.contains('active')) {
+      // Remember which answers are revealed
+      const revealed = new Set();
+      $$('.teacher-answer.show').forEach(el => {
+        const topic = el.closest('.teacher-topic');
+        if (topic) revealed.add(topic.querySelector('.topic-number')?.textContent);
+      });
+      await renderTeacher();
+      // Re-reveal previously shown answers
+      if (revealed.size > 0) {
+        $$('.teacher-topic').forEach(el => {
+          const label = el.querySelector('.topic-number')?.textContent;
+          if (revealed.has(label)) {
+            const answer = el.querySelector('.teacher-answer');
+            const btn = el.querySelector('.teacher-reveal-btn');
+            if (answer) answer.classList.add('show');
+            if (btn) btn.textContent = 'Hide Answer';
+          }
+        });
+      }
+    }
+  }, 10000);
+}
+function stopTeacherAutoRefresh() {
+  if (teacherRefreshInterval) {
+    clearInterval(teacherRefreshInterval);
+    teacherRefreshInterval = null;
+  }
+}
+
 /* ---------- Aggregate vote storage ----------
    Since we have no server, we aggregate votes per-device using
    a shared localStorage key. Each device's vote is stored with
@@ -626,5 +663,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (new URLSearchParams(window.location.search).get('teacher') === 'true') {
     renderTeacher();
     showPage('teacher');
+    startTeacherAutoRefresh();
   }
 });
