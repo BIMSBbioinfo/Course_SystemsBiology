@@ -54,7 +54,7 @@ const topics = [
   {
     id: 2,
     title: 'Hemoglobin Gene Expression',
-    artifact: 'You observe HBB and HBA hemoglobin gene expression in your non-blood cell clusters — chondrocytes, monocytes, or progenitor cells. Is this red blood cell contamination, or something else?',
+    artifact: 'You observe HBB and HBA hemoglobin gene expression in your non-blood cell clusters. Is this red blood cell contamination, or something else?',
     signal: 'Hemoglobin gene expression outside of erythrocytes is a well-documented biological phenomenon. Chondrocytes residing in avascular cartilage actively express hemoglobin genes to produce membrane-free protein complexes known as "hedy" structures, which serve as oxygen reservoirs in hypoxic tissue environments. Additionally, erythroid-biased hematopoietic progenitors express HBB as part of lineage priming prior to terminal differentiation.',
     answer: 'both',
     explanation: 'Extra-erythrocytic hemoglobin expression has been observed in multiple cell types and represents a genuine biological adaptation rather than contamination. Chondrocytes produce hemoglobin proteins that form membrane-free "hedy" structures for oxygen storage, functioning analogously to myoglobin in skeletal muscle. This adaptation is particularly relevant in the context of osteoarthritis, where hypoxic conditions in avascular cartilage drive increased hemoglobin expression as part of the cellular response to limited oxygen availability.',
